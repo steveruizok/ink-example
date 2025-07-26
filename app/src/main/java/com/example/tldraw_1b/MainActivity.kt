@@ -37,6 +37,7 @@ import androidx.ink.brush.StockBrushes
 import androidx.ink.rendering.android.canvas.CanvasStrokeRenderer
 import androidx.ink.strokes.Stroke
 import androidx.input.motionprediction.MotionEventPredictor
+import com.example.tldraw_1b.presentation.drawing_screen.DrawingScreen
 
 class MainActivity : ComponentActivity(), InProgressStrokesFinishedListener {
     private lateinit var inProgressStrokesView: InProgressStrokesView
@@ -49,8 +50,11 @@ class MainActivity : ComponentActivity(), InProgressStrokesFinishedListener {
         canvasStrokeRenderer = CanvasStrokeRenderer.create()
 
         setContent {
-//            DrawingView(inProgressStrokesView = inProgressStrokesView)
-            DrawingSurface(inProgressStrokesView, canvasStrokeRenderer, finishedStrokesState.value)
+            DrawingScreen(
+                inProgressStrokesView = inProgressStrokesView,
+                finishedStrokesState = finishedStrokesState,
+                modifier = Modifier
+            )
         }
 
         inProgressStrokesView.addFinishedStrokesListener(this)
@@ -59,10 +63,7 @@ class MainActivity : ComponentActivity(), InProgressStrokesFinishedListener {
     @UiThread
     override fun onStrokesFinished(strokes: Map<InProgressStrokeId, Stroke>) {
         finishedStrokesState.value += strokes.values
-        // Delay the removal to prevent the flash - let the next frame render first
-        inProgressStrokesView.post {
-            inProgressStrokesView.removeFinishedStrokes(strokes.keys)
-        }
+        inProgressStrokesView.removeFinishedStrokes(strokes.keys)
     }
 }
 
