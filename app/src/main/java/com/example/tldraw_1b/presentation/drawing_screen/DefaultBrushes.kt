@@ -8,7 +8,7 @@ import androidx.ink.brush.StockBrushes
 // Pressure sensitive brush
 val pressurePen = Brush.createWithColorIntArgb(
     family = StockBrushes.pressurePenLatest,
-    colorIntArgb = Color.Magenta.toArgb(),
+    colorIntArgb = Color.Black.toArgb(),
     size = 8F,
     epsilon = 0.1F
 )
@@ -24,7 +24,7 @@ val highlighterBrush = Brush.createWithColorIntArgb(
 // Circular brush, no pressure sensitivity
 val markerBrush = Brush.createWithColorIntArgb(
     family = StockBrushes.markerLatest,
-    colorIntArgb = Color.Magenta.toArgb(),
+    colorIntArgb = Color.Blue.toArgb(),
     size = 5F,
     epsilon = 0.1F
 )
